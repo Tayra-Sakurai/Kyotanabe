@@ -14,5 +14,6 @@ namespace Kizu.Models
         public DateTime DateTime { get; set; } = DateTime.Now;
         public double Expense { get; set; } = 0;
         public virtual Category Category { get; set; } = null!;
+        public float[] Vector { get; set; } = new float[768];
     }
 }

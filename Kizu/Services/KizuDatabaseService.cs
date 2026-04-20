@@ -65,5 +65,15 @@ namespace Kizu.Services
             context.Update(entity);
             await context.SaveChangesAsync();
         }
+
+        public bool Exists<T>(T entity)
+            where T : class
+        {
+            using KizuContext context = factory.CreateDbContext();
+
+            EntityEntry<T> entry = context.Attach(entity);
+
+            return entry.State == EntityState.Unchanged;
+        }
     }
 }

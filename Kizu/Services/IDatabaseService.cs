@@ -59,5 +59,14 @@ namespace Kizu.Services
         /// <returns>The <see cref="Task"/> which represents the asynchronous operation.</returns>
         Task UpdateAsync<T>(T entity)
             where T : class;
+
+        /// <summary>
+        /// Checks if <paramref name="entity"/> exists.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity to be tested.</typeparam>
+        /// <param name="entity">The entity to be tested if it exists.</param>
+        /// <returns>true if exists; otherwise returns false.</returns>
+        bool Exists<T>(T entity)
+            where T : class;
     }
 }

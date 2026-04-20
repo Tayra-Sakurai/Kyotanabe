@@ -27,9 +27,6 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260317003" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Messages\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Inari\Inari.csproj" />
   </ItemGroup>
 </Project>
