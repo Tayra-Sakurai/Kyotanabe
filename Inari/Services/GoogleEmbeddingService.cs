@@ -1,0 +1,96 @@
+﻿using Inari.Extensions;
+using Inari.Options;
+using Microsoft.Extensions.AI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Inari.Services
+{
+    public class GoogleEmbeddingService : IEmbeddingService<TaskType>
+    {
+        private readonly IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator;
+
+        public GoogleEmbeddingService(IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator)
+        {
+            this.embeddingGenerator = embeddingGenerator;
+        }
+
+        public async Task<float[]> GetVectorAsync(string query, string? title = null, TaskType taskType = default)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(query);
+
+            AdditionalPropertiesDictionary additionalProperties = new();
+
+            switch (taskType)
+            {
+                case TaskType.SearchResult:
+                    additionalProperties["TaskType"] = "RETRIEVAL_QUERY";
+                    break;
+
+                case TaskType.QuestionAnswering:
+                    additionalProperties["TaskType"] = "QUESTION_ANSWERING";
+                    break;
+
+                case TaskType.FactChecking:
+                    additionalProperties["TaskType"] = "FACT_VERIFICATION";
+                    break;
+
+                case TaskType.CodeRetrieval:
+                    additionalProperties["TaskType"] = "CODE_RETRIEVAL_QUERY";
+                    break;
+
+                case TaskType.Classification:
+                    additionalProperties["TaskType"] = "CLASSIFICATION";
+                    break;
+
+                case TaskType.Clustering:
+                    additionalProperties["TaskType"] = "CLUSTERING";
+                    break;
+
+                case TaskType.RetrievalDocument:
+                    additionalProperties["TaskType"] = "RETRIEVAL_DOCUMENT";
+                    additionalProperties["Title"] = title;
+                    break;
+
+                default:
+                    additionalProperties["TaskType"] = "SEMANTIC_SIMILARITY";
+                    break;
+            }
+
+            EmbeddingGenerationOptions options = new()
+            {
+                Dimensions = 768,
+                AdditionalProperties = additionalProperties,
+            };
+
+            Embedding<float> embedding = await embeddingGenerator.GenerateAsync(query, options);
+
+            return embedding.Vector.ToArray();
+        }
+
+        public async IAsyncEnumerable<(T Value, float MatchRate, int Rank)> SearchAsync<T>(string query, IEnumerable<float[]> vectors, IEnumerable<T> values)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(query);
+
+            if (vectors.Count() != values.Count())
+                throw new InvalidOperationException("Unmatched length of the data.");
+
+            float[] vec1 = await GetVectorAsync(query, null, TaskType.SearchResult);
+
+            List<float> matchRates = [];
+
+            foreach (var (value, vector) in values.Zip(vectors))
+            {
+                if (value is T t && vector is float[] vec2)
+                {
+                    int rank = matchRates.Count(v => v > vec1.GetInnerProduct(vec2));
+                    matchRates.Add(vec1.GetInnerProduct(vec2));
+                    yield return (t, vec1.GetInnerProduct(vec2), rank);
+                }
+            }
+        }
+    }
+}
