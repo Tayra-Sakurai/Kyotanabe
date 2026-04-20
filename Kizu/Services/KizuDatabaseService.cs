@@ -46,6 +46,17 @@ namespace Kizu.Services
             await context.SaveChangesAsync();
         }
 
+        public async Task AddAsync<T>(IEnumerable<T> entities)
+            where T : class
+        {
+            using KizuContext context = await factory.CreateDbContextAsync();
+
+            foreach (T entity in entities)
+                await context.AddAsync(entity);
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync<T>(T entity)
             where T : class
         {

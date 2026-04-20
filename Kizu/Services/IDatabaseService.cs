@@ -20,6 +20,7 @@ namespace Kizu.Services
         /// <typeparam name="T">The entity type.</typeparam>
         /// <param name="selector">The selector function.</param>
         /// <returns>The task which returns the list of the retrieved entities.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="selector"/> is null.</exception>
         Task<IEnumerable<T>> GetEntitiesAsync<T>(Func<TContext, DbSet<T>> selector)
             where T : class;
 
@@ -39,6 +40,15 @@ namespace Kizu.Services
         /// <param name="entity">The entity to be added.</param>
         /// <returns>The <see cref="Task"/> which represents the asynchronous operation.</returns>
         Task AddAsync<T>(T entity)
+            where T : class;
+
+        /// <summary>
+        /// Asynchronously adds the entities you defined.
+        /// </summary>
+        /// <typeparam name="T">The type of entities to be added.</typeparam>
+        /// <param name="entities">The entities to be added.</param>
+        /// <returns>The <see cref="Task"/> which represents the asynchronous operation.</returns>
+        Task AddAsync<T>(IEnumerable<T> entities)
             where T : class;
 
         /// <summary>
