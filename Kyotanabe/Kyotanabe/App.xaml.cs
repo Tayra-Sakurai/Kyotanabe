@@ -1,7 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using Google.GenAI;
+using Inari.Options;
+using Inari.Services;
 using Kizu.Contexts;
 using Kizu.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -52,15 +56,27 @@ namespace Kyotanabe
             ApplicationData.GetDefault().LocalSettings.Values["Version"] = "1.0.0";
 
             Ioc.Default.ConfigureServices(
-                new ServiceCollection()
-                .AddDbContextFactory<KizuContext>(optionsBuilder
-                => optionsBuilder.UseLazyLoadingProxies()
-                .UseSqlite($"Data Source={System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Kizu.db")}"))
-                .AddSingleton<IDatabaseService<KizuContext>, KizuDatabaseService>()
-                .BuildServiceProvider());
+                GetService());
 
             _window = new MainWindow();
             _window.Activate();
+        }
+
+        private static IServiceProvider GetService()
+        {
+            ServiceCollection services = new();
+            services.AddEmbeddingGenerator(new Client().AsIEmbeddingGenerator("gemini-embedding-2-preview"));
+
+            string source = System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Kizu.db");
+            services.AddDbContextFactory<KizuContext>(
+                builder =>
+                builder.UseLazyLoadingProxies()
+                .UseSqlite($"Data Source={source}"));
+
+            services.AddSingleton<IDatabaseService<KizuContext>, KizuDatabaseService>();
+            services.AddSingleton<IEmbeddingService<TaskType>, GoogleEmbeddingService>();
+
+            return services.BuildServiceProvider();
         }
     }
 }
