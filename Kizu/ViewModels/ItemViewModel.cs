@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Inari.Options;
 using Inari.Services;
 using Kizu.Contexts;
+using Kizu.Messages;
 using Kizu.Models;
 using Kizu.Services;
 using Kizu.Validators;
@@ -217,6 +219,19 @@ namespace Kizu.ViewModels
                 categories.Insert(rank, value);
 
             Category = categories[0];
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanDelete))]
+        public async Task DeleteAsync()
+        {
+            await databaseService.RemoveAsync(item);
+
+            WeakReferenceMessenger.Default.Send(new ItemDeletedMessage(item));
+        }
+
+        private bool CanDelete()
+        {
+            return databaseService.Exists(item);
         }
     }
 }
