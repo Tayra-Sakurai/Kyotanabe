@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,22 @@ namespace Kizu.Services
             using KizuContext context = await factory.CreateDbContextAsync();
 
             return await selector(context).ToListAsync();
+        }
+
+        public List<T> GetEntities<T>()
+            where T : class
+        {
+            using KizuContext context = factory.CreateDbContext();
+
+            return context.Set<T>().ToList();
+        }
+
+        public List<T> GetEntities<T>(Expression<Func<KizuContext, DbSet<T>>> selector)
+            where T : class
+        {
+            using KizuContext context = factory.CreateDbContext();
+
+            return selector.Compile()(context).ToList();
         }
 
         public async Task RemoveAsync<T>(T entity)

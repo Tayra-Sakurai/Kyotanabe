@@ -69,6 +69,8 @@ namespace Kizu.ViewModels
             {
                 Category = Categories.First(),
                 CategoryId = Categories.First().Id,
+                PaymentMethod = (await databaseService.GetEntitiesAsync(context => context.PaymentMethods)).First(),
+                PaymentMethodId = (await databaseService.GetEntitiesAsync(context => context.PaymentMethods)).First().Id,
             };
 
             await databaseService.AddAsync(item);

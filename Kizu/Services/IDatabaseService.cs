@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,6 +68,23 @@ namespace Kizu.Services
         /// <param name="entity">The entity to be tested if it exists.</param>
         /// <returns>true if exists; otherwise returns false.</returns>
         bool Exists<T>(T entity)
+            where T : class;
+
+        /// <summary>
+        /// Synchronously gets the entities in the type of <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of entities.</typeparam>
+        /// <returns>The list of the entities.</returns>
+        List<T> GetEntities<T>()
+            where T : class;
+
+        /// <summary>
+        /// Gets the entities selected by the <paramref name="selector"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of entities.</typeparam>
+        /// <param name="selector">The selector function.</param>
+        /// <returns>The entities.</returns>
+        List<T> GetEntities<T>(Expression<Func<TContext, DbSet<T>>> selector)
             where T : class;
     }
 }
