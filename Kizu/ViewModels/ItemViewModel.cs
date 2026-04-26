@@ -69,7 +69,10 @@ namespace Kizu.ViewModels
             set
             {
                 if (SetProperty(item.ItemName, value, item, (m, v) => m.ItemName = v, true))
+                { 
                     SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
             }
         }
 
@@ -77,14 +80,28 @@ namespace Kizu.ViewModels
         public Category Category
         {
             get => item.Category;
-            set => SetProperty(item.Category, value, item, (m, v) => m.Category = v, true);
+            set
+            {
+                if (SetProperty(item.Category, value, item, (m, v) => m.Category = v, true))
+                {
+                    SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
+            }
         }
 
         [Required]
         public PaymentMethod PaymentMethod
         {
             get => item.PaymentMethod;
-            set => SetProperty(item.PaymentMethod, value, item, (m, v) => m.PaymentMethod = v, true);
+            set
+            {
+                if (SetProperty(item.PaymentMethod, value, item, (m, v) => m.PaymentMethod = v, true))
+                {
+                    SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
+            }
         }
 
         [Required]
@@ -93,7 +110,14 @@ namespace Kizu.ViewModels
         public double Expense
         {
             get => item.Expense;
-            set => SetProperty(item.Expense, value, item, (m, v) => m.Expense = v, true);
+            set
+            {
+                if (SetProperty(item.Expense, value, item, (m, v) => m.Expense = v, true))
+                {
+                    SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
+            }
         }
 
         [Required]
@@ -102,7 +126,14 @@ namespace Kizu.ViewModels
         public double Income
         {
             get => item.Income;
-            set => SetProperty(item.Income, value, item, (m, v) => m.Income = v, true);
+            set
+            {
+                if (SetProperty(item.Income, value, item, (m, v) => m.Income = v, true))
+                {
+                    SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
+            }
         }
 
         [Required]
@@ -113,7 +144,11 @@ namespace Kizu.ViewModels
             set
             {
                 if (SetProperty(item.DateTime.Date, value, item, SetDate, true))
+                {
                     ValidateProperty(Time, nameof(Time));
+                    SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
             }
         }
 
@@ -125,7 +160,11 @@ namespace Kizu.ViewModels
             set
             {
                 if (SetProperty(item.DateTime.TimeOfDay, value, item, SetTime, true))
+                {
                     ValidateProperty(Date, nameof(Date));
+                    SaveCommand.NotifyCanExecuteChanged();
+                    SuggestCategoryCommand.NotifyCanExecuteChanged();
+                }
             }
         }
 
@@ -156,6 +195,28 @@ namespace Kizu.ViewModels
         private bool CanSave()
         {
             return !(string.IsNullOrWhiteSpace(item.ItemName) || HasErrors);
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSave))]
+        public async Task SuggestCategoryAsync()
+        {
+            if (HasErrors)
+                return;
+
+            if (ItemName == null)
+                return;
+
+            List<Category> categories = [];
+
+            await foreach (var (value, _, rank) in
+                embeddingService.SearchAsync(
+                    ItemName,
+                    from Category category in CategoryList
+                    select category.Vector,
+                    CategoryList))
+                categories.Insert(rank, value);
+
+            Category = categories[0];
         }
     }
 }
