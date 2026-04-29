@@ -11,5 +11,19 @@ namespace Kizu.Models
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public virtual ICollection<PaymentMethod> PaymentMethods { get; set; } = new HashSet<PaymentMethod>();
+
+        public double Invoice()
+        {
+            double total = 0;
+
+            foreach (PaymentMethod m in PaymentMethods)
+                total +=
+                    m
+                    .Items
+                    .Where(i => i.DateTime.Month == DateTime.Now.Month)
+                    .Sum(i => i.Income);
+
+            return total;
+        }
     }
 }

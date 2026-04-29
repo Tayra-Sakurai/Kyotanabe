@@ -56,6 +56,38 @@ namespace Kizu.ViewModels
             }
         }
 
+        [RelayCommand(AllowConcurrentExecutions = false)]
+        public async Task AddAsync()
+        {
+            Category newCategory = new();
+            await _databaseService.AddAsync(newCategory);
+            await LoadAsync();
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSearch))]
+        public async Task SearchAsync(string? searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+                return;
+
+            List<Category> categories = [.. Categories];
+            Categories.Clear();
+
+            await foreach (
+                (Category value, float _, int rank) in
+                _embeddingService.SearchAsync(
+                    searchText,
+                    from c in categories
+                    select c.Vector,
+                    categories))
+                Categories.Insert(rank, value);
+        }
+
+        private static bool CanSearch(string? searchText)
+        {
+            return string.IsNullOrWhiteSpace(searchText);
+        }
+
         private bool CanRemove(Category? category)
         {
             return category is not null && _databaseService.Exists(category);
