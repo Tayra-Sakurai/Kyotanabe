@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Kizu.Contexts;
+using Kizu.Messages;
 using Kizu.Models;
 using Kizu.Services;
 using System;
@@ -42,6 +44,34 @@ namespace Kizu.ViewModels
             await databaseService.AddAsync(account);
 
             await LoadAsync();
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanRemove))]
+        public async Task RemoveAsync(Account? account)
+        {
+            ArgumentNullException.ThrowIfNull(account);
+
+            await databaseService.RemoveAsync(account);
+            await LoadAsync();
+        }
+
+        private bool CanRemove(Account? account)
+        {
+            return account is not null && databaseService.Exists(account);
+        }
+
+        [RelayCommand(CanExecute = nameof(CanInvoke))]
+        public static void Invoke(Account? account)
+        {
+            if (account is null)
+                return;
+
+            WeakReferenceMessenger.Default.Send(new AccountInvokedMessage(account));
+        }
+
+        private static bool CanInvoke(Account? account)
+        {
+            return account is not null;
         }
     }
 }
