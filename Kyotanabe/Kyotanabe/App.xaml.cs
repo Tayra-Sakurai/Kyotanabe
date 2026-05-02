@@ -4,6 +4,7 @@ using Inari.Options;
 using Inari.Services;
 using Kizu.Contexts;
 using Kizu.Services;
+using Kizu.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
@@ -75,6 +76,15 @@ namespace Kyotanabe
 
             services.AddSingleton<IDatabaseService<KizuContext>, KizuDatabaseService>();
             services.AddSingleton<IEmbeddingService<TaskType>, GoogleEmbeddingService>();
+
+            services.AddTransient<AccountsViewModel>();
+            services.AddTransient<AccountViewModel>();
+            services.AddTransient<CategoriesViewModel>();
+            services.AddTransient<CategoryViewModel>();
+            services.AddTransient<ItemsViewModel>();
+            services.AddTransient<ItemViewModel>();
+            services.AddTransient<PaymentMethodsViewModel>();
+            services.AddTransient<PaymentMethodViewModel>();
 
             return services.BuildServiceProvider();
         }
