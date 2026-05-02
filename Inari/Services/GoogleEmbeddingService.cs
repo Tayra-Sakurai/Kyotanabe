@@ -27,36 +27,36 @@ namespace Inari.Services
             switch (taskType)
             {
                 case TaskType.SearchResult:
-                    additionalProperties["TaskType"] = "RETRIEVAL_QUERY";
+                    additionalProperties["task_type"] = "RETRIEVAL_QUERY";
                     break;
 
                 case TaskType.QuestionAnswering:
-                    additionalProperties["TaskType"] = "QUESTION_ANSWERING";
+                    additionalProperties["task_type"] = "QUESTION_ANSWERING";
                     break;
 
                 case TaskType.FactChecking:
-                    additionalProperties["TaskType"] = "FACT_VERIFICATION";
+                    additionalProperties["task_type"] = "FACT_VERIFICATION";
                     break;
 
                 case TaskType.CodeRetrieval:
-                    additionalProperties["TaskType"] = "CODE_RETRIEVAL_QUERY";
+                    additionalProperties["task_type"] = "CODE_RETRIEVAL_QUERY";
                     break;
 
                 case TaskType.Classification:
-                    additionalProperties["TaskType"] = "CLASSIFICATION";
+                    additionalProperties["task_type"] = "CLASSIFICATION";
                     break;
 
                 case TaskType.Clustering:
-                    additionalProperties["TaskType"] = "CLUSTERING";
+                    additionalProperties["task_type"] = "CLUSTERING";
                     break;
 
                 case TaskType.RetrievalDocument:
-                    additionalProperties["TaskType"] = "RETRIEVAL_DOCUMENT";
-                    additionalProperties["Title"] = title;
+                    additionalProperties["task_type"] = "RETRIEVAL_DOCUMENT";
+                    additionalProperties["title"] = title;
                     break;
 
                 default:
-                    additionalProperties["TaskType"] = "SEMANTIC_SIMILARITY";
+                    additionalProperties["task_type"] = "SEMANTIC_SIMILARITY";
                     break;
             }
 
