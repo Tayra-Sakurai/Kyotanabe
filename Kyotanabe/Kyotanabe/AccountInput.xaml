@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Kyotanabe.AccountInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kyotanabe"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Kizu.Models"
+    xmlns:viewmodels="using:Kizu.ViewModels"
+    xmlns:controls="using:Kyotanabe.Templates"
+    d:DataContext="{d:DesignInstance Type=viewmodels:AccountViewModel}"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Spacing="8"
+        Orientation="Vertical">
+        <controls:ValidationTextBox
+            x:Uid="/FieldResources/AccountName"
+            Text="{Binding Name}"
+            Property="Name"/>
+    </StackPanel>
+</UserControl>

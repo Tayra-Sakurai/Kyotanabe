@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Kyotanabe.ItemInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kyotanabe"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Kyotanabe.Templates"
+    xmlns:viewmodels="using:Kizu.ViewModels"
+    xmlns:models="using:Kizu.Models"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ItemViewModel}"
+    mc:Ignorable="d">
+
+    <Grid RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Spacing="4">
+            <CalendarDatePicker
+                Date="{Binding Date, Mode=TwoWay}"
+                x:Uid="/FieldResources/Date"/>
+            <TimePicker 
+                Time="{Binding Time, Mode=TwoWay}"
+                x:Uid="/FieldResources/Time"/>
+        </StackPanel>
+        <controls:ValidationTextBox
+            Text="{Binding ItemName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            x:Uid="/FieldResources/Name"
+            Property="ItemName"
+            Grid.Row="1"/>
+        <StackPanel
+            Spacing="4"
+            Orientation="Horizontal"
+            Grid.Row="2">
+            <ComboBox
+                ItemsSource="{Binding CategoryList}"
+                SelectedItem="{Binding Category, Mode=TwoWay}"
+                x:Uid="/FieldResources/Category">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:Category">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <ComboBox.ItemContainerStyle>
+                    <Style
+                        TargetType="ComboBoxItem"
+                        BasedOn="{StaticResource DefaultComboBoxItemStyle}"/>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+            <ComboBox
+                ItemsSource="{Binding PaymentMethodList}"
+                SelectedItem="{Binding PaymentMethod, Mode=TwoWay}"
+                x:Uid="/FieldResources/PaymentMethod">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="models:PaymentMethod">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <controls:ValidationNumberBox
+            x:Uid="/FieldResources/Expense"
+            Value="{Binding Expense, Mode=TwoWay}"
+            PropertyName="Expense"
+            Grid.Row="3"/>
+        <controls:ValidationNumberBox
+            x:Uid="/FieldResources/Income"
+            Value="{Binding Income, Mode=TwoWay}"
+            PropertyName="Income"
+            Grid.Row="4"/>
+    </Grid>
+</UserControl>

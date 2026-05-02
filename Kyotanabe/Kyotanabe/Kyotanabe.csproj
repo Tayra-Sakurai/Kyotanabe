@@ -11,6 +11,12 @@
     <WinUISDKReferences>false</WinUISDKReferences>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="AccountInput.xaml" />
+    <None Remove="CategoryInput.xaml" />
+    <None Remove="ItemInput.xaml" />
+    <None Remove="PaymentMethodInput.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -41,6 +47,30 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Inari\Inari.csproj" />
     <ProjectReference Include="..\..\Kizu\Kizu.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="CategoryInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="AccountInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="PaymentMethodInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ItemInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
     <!-- Publish Properties -->
