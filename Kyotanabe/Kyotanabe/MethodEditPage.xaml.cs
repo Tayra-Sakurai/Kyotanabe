@@ -26,25 +26,25 @@ namespace Kyotanabe;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class CategoryEditPage : Page, IRecipient<CategoryDeletedMessage>
+public sealed partial class MethodEditPage : Page, IRecipient<PaymentMethodDeletedMessage>
 {
-    public CategoryEditPage()
+    public MethodEditPage()
     {
         InitializeComponent();
 
-        DataContext = Ioc.Default.GetRequiredService<CategoryViewModel>();
+        DataContext = Ioc.Default.GetRequiredService<PaymentMethodViewModel>();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
-        if (e.Parameter is Category category &&
-            DataContext is CategoryViewModel dataContext)
-            dataContext.InitializeForExistingValue(category);
+        if (DataContext is PaymentMethodViewModel dataContext &&
+            e.Parameter is PaymentMethod paymentMethod)
+            dataContext.InitializeForExistingValue(paymentMethod);
     }
 
-    public void Receive(CategoryDeletedMessage message)
+    public void Receive(PaymentMethodDeletedMessage message)
     {
         if (Frame.CanGoBack)
             Frame.GoBack();

@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Mvvm.DependencyInjection;
-using CommunityToolkit.Mvvm.Messaging;
-using Kizu.Messages;
-using Kizu.Models;
-using Kizu.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -10,49 +12,46 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using CommunityToolkit.Mvvm.Messaging;
+using Kizu.Messages;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Kizu.ViewModels;
+using Kizu.Models;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace Kyotanabe
+namespace Kyotanabe;
+
+/// <summary>
+/// An empty page that can be used on its own or navigated to within a Frame.
+/// </summary>
+public sealed partial class AccountEditPage : Page, IRecipient<AccountDeletedMessage>
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class AccountEditPage : Page, IRecipient<AccountDeletedMessage>
+    public AccountEditPage()
     {
-        public AccountEditPage()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            DataContext = Ioc.Default.GetRequiredService<AccountViewModel>();
+        DataContext = Ioc.Default.GetRequiredService<AccountViewModel>();
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (DataContext is AccountViewModel dataContext &&
+            e.Parameter is Account account)
+            dataContext.InitializeForExistingValue(account);
+    }
+
+    public void Receive(AccountDeletedMessage message)
+    {
+        if (Frame.CanGoBack)
+        {
+            Frame.GoBack();
+            return;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
 
-            if (e.Parameter is Account account &&
-                DataContext is AccountViewModel accountViewModel)
-                accountViewModel.InitializeForExistingValue(account);
-        }
-
-        public void Receive(AccountDeletedMessage message)
-        {
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-                return;
-            }
-
-            
-        }
     }
 }

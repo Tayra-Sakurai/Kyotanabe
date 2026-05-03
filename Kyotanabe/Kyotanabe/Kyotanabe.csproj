@@ -17,7 +17,9 @@
     <None Remove="BasePage.xaml" />
     <None Remove="CategoryEditPage.xaml" />
     <None Remove="CategoryInput.xaml" />
+    <None Remove="ItemEditPage.xaml" />
     <None Remove="ItemInput.xaml" />
+    <None Remove="MethodEditPage.xaml" />
     <None Remove="PaymentMethodInput.xaml" />
     <None Remove="SetupBasePage.xaml" />
   </ItemGroup>
@@ -54,6 +56,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="MethodEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="AccountEditPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -61,6 +69,12 @@
 
   <ItemGroup>
     <Page Update="CategoryEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ItemEditPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -37,4 +37,52 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="local2:EditControl" xmlns:local2="using:Kyotanabe.Templates">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local2:EditControl">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Uid="EditIntro"/>
+                            <ContentPresenter
+                                Content="{TemplateBinding Content}"
+                                Grid.Row="1"/>
+                            <CommandBar
+                                DefaultLabelPosition="Right"
+                                Grid.Row="3">
+                                <AppBarButton
+                                    x:Uid="/FieldResources/SaveBtn"
+                                    Icon="Save"
+                                    Command="{TemplateBinding SaveCommand}"/>
+                                <AppBarButton
+                                    x:Uid="/FieldResources/RemoveBtn"
+                                    Icon="Delete">
+                                    <AppBarButton.Flyout>
+                                        <Flyout>
+                                            <StackPanel>
+                                                <TextBlock x:Uid="RemoveMessage" Style="{StaticResource BaseTextBlockStyle}"/>
+                                                <Button
+                                                    x:Uid="/FieldResources/DeleteConfirmBtn"
+                                                    Command="{TemplateBinding RemoveCommand}"/>
+                                            </StackPanel>
+                                        </Flyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
+                            </CommandBar>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

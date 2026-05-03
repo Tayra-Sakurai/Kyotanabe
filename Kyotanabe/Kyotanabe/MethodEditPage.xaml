@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="Kyotanabe.CategoryEditPage"
+    x:Class="Kyotanabe.MethodEditPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Kyotanabe"
@@ -8,14 +8,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Kyotanabe.Templates"
     xmlns:viewmodels="using:Kizu.ViewModels"
-    d:DataContext="{d:DesignInstance Type=viewmodels:CategoryViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewmodels:PaymentMethodViewModel}"
     mc:Ignorable="d">
 
     <Grid>
         <controls:EditControl
             SaveCommand="{Binding SaveCommand}"
             RemoveCommand="{Binding RemoveCommand}">
-            <local:CategoryInput/>
+            <local:PaymentMethodInput/>
         </controls:EditControl>
     </Grid>
 </Page>

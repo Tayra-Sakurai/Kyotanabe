@@ -45,7 +45,7 @@ namespace Kizu.ViewModels
             };
         }
 
-        public async Task InitializeForExistingValueAsync(Item item)
+        public void InitializeForExistingValue(Item item)
         {
             this.item = item;
 

@@ -14,8 +14,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Kizu.ViewModels;
-using CommunityToolkit.Mvvm.Messaging;
-using Kizu.Messages;
 using Kizu.Models;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -26,27 +24,21 @@ namespace Kyotanabe;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class CategoryEditPage : Page, IRecipient<CategoryDeletedMessage>
+public sealed partial class ItemEditPage : Page
 {
-    public CategoryEditPage()
+    public ItemEditPage()
     {
         InitializeComponent();
 
-        DataContext = Ioc.Default.GetRequiredService<CategoryViewModel>();
+        DataContext = Ioc.Default.GetRequiredService<ItemViewModel>();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
-        if (e.Parameter is Category category &&
-            DataContext is CategoryViewModel dataContext)
-            dataContext.InitializeForExistingValue(category);
-    }
-
-    public void Receive(CategoryDeletedMessage message)
-    {
-        if (Frame.CanGoBack)
-            Frame.GoBack();
+        if (DataContext is ItemViewModel dataContext &&
+            e.Parameter is Item item)
+            dataContext.InitializeForExistingValue(item);
     }
 }
