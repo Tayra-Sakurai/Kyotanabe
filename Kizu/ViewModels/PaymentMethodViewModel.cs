@@ -79,6 +79,17 @@ namespace Kizu.ViewModels
             await databaseService.UpdateAsync(paymentMethod);
         }
 
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSave))]
+        public async Task AddAsync()
+        {
+            ValidateAllProperties();
+            if (HasErrors) return;
+
+            await databaseService.AddAsync(paymentMethod);
+
+            WeakReferenceMessenger.Default.Send(new PaymentMethodAddedMessage(paymentMethod));
+        }
+
         [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(Exists))]
         public async Task RemoveAsync()
         {

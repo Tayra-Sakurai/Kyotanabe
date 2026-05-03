@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Kizu.Contexts;
+using Kizu.Messages;
 using Kizu.Models;
 using Kizu.Services;
 using System;
@@ -55,6 +57,32 @@ namespace Kizu.ViewModels
                 return;
 
             await databaseService.UpdateAsync(account);
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSave))]
+        public async Task AddAsync()
+        {
+            ValidateAllProperties();
+            if (HasErrors) return;
+
+            await databaseService.AddAsync(account);
+
+            WeakReferenceMessenger.Default.Send(new AccountAddedMessage(account));
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(Exists))]
+        public async Task RemoveAsync()
+        {
+            if (databaseService.Exists(account))
+            {
+                await databaseService.RemoveAsync(account);
+                WeakReferenceMessenger.Default.Send(new AccountDeletedMessage(account));
+            }
+        }
+
+        private bool Exists()
+        {
+            return databaseService.Exists(account);
         }
 
         private bool CanSave()

@@ -54,7 +54,12 @@ namespace Kyotanabe
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            ApplicationData.GetDefault().LocalSettings.Values["Version"] = "1.0.0";
+            ApplicationDataContainer settings = ApplicationData.GetDefault().LocalSettings;
+
+            settings.Values["Version"] = "1.0.0";
+
+            if (settings.Values["IsSetupCompleted"] is not true)
+                settings.Values["IsSetupCompleted"] = false;
 
             Ioc.Default.ConfigureServices(
                 GetService());

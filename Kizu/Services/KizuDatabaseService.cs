@@ -17,6 +17,10 @@ namespace Kizu.Services
         public KizuDatabaseService(IDbContextFactory<KizuContext> factory)
         {
             this.factory = factory;
+
+            using KizuContext context = factory.CreateDbContext();
+
+            context.Database.Migrate();
         }
 
         public async Task<IEnumerable<T>> GetEntitiesAsync<T>(Func<KizuContext, DbSet<T>> selector)

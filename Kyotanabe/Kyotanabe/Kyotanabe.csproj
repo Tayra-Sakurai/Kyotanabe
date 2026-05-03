@@ -12,10 +12,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="AccountEditPage.xaml" />
     <None Remove="AccountInput.xaml" />
+    <None Remove="BasePage.xaml" />
+    <None Remove="CategoryEditPage.xaml" />
     <None Remove="CategoryInput.xaml" />
     <None Remove="ItemInput.xaml" />
     <None Remove="PaymentMethodInput.xaml" />
+    <None Remove="SetupBasePage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +51,30 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Inari\Inari.csproj" />
     <ProjectReference Include="..\..\Kizu\Kizu.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="AccountEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="CategoryEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="SetupBasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="BasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

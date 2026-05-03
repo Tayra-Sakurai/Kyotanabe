@@ -126,6 +126,9 @@
   <data name="AccountName.PlaceholderText" xml:space="preserve">
     <value>Please do not enter secrets.</value>
   </data>
+  <data name="AddBtn.Label" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="Balance.Header" xml:space="preserve">
     <value>Balance</value>
   </data>
@@ -138,17 +141,38 @@
   <data name="Date.Header" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="DetailBtn.Label" xml:space="preserve">
+    <value>Detail</value>
+  </data>
   <data name="Expense.Header" xml:space="preserve">
     <value>Expense</value>
   </data>
   <data name="Income.Header" xml:space="preserve">
     <value>Increase</value>
   </data>
+  <data name="LoadBtn.Label" xml:space="preserve">
+    <value>Load Data</value>
+  </data>
   <data name="Name.Header" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NextBtn.Label" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="PaymentMethod.Header" xml:space="preserve">
     <value>Payment Method</value>
+  </data>
+  <data name="RemoveBtn.Label" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="RemoveConfirmBtn.Content" xml:space="preserve">
+    <value>I got it.</value>
+  </data>
+  <data name="RemoveMessage.Text" xml:space="preserve">
+    <value>The selected item will be deleted and you cannot recover it forever. Are you sure to do?</value>
+  </data>
+  <data name="SaveBtn.Label" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="Time.Header" xml:space="preserve">
     <value>Time</value>

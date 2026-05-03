@@ -117,83 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account.Header" xml:space="preserve">
-    <value>関連する銀行口座</value>
-    <comment>銀行口座</comment>
+  <data name="Accounts.Content" xml:space="preserve">
+    <value>口座一覧</value>
   </data>
-  <data name="AccountName.Header" xml:space="preserve">
-    <value>銀行口座の表示名</value>
-    <comment>銀行口座に対してのName 欄．</comment>
+  <data name="Categories.Content" xml:space="preserve">
+    <value>カテゴリ一覧</value>
   </data>
-  <data name="AccountName.PlaceholderText" xml:space="preserve">
-    <value>機密情報は入力しないでください．</value>
+  <data name="Items.Content" xml:space="preserve">
+    <value>項目一覧</value>
   </data>
-  <data name="AddBtn.Label" xml:space="preserve">
-    <value>追加</value>
-    <comment>追加ボタンのラベル</comment>
-  </data>
-  <data name="Balance.Header" xml:space="preserve">
-    <value>残高</value>
-    <comment>残高表示欄用</comment>
-  </data>
-  <data name="Budget.Header" xml:space="preserve">
-    <value>月当たり予算額</value>
-    <comment>1か月分の予算を入力するフォームの案内.</comment>
-  </data>
-  <data name="Category.Header" xml:space="preserve">
-    <value>カテゴリ</value>
-    <comment>分類項目の表示名</comment>
-  </data>
-  <data name="Date.Header" xml:space="preserve">
-    <value>日付</value>
-    <comment>日付ピッカーのタイトル</comment>
-  </data>
-  <data name="DetailBtn.Label" xml:space="preserve">
-    <value>詳細</value>
-    <comment>詳細ボタン</comment>
-  </data>
-  <data name="Expense.Header" xml:space="preserve">
-    <value>支出額</value>
-    <comment>支出額</comment>
-  </data>
-  <data name="Income.Header" xml:space="preserve">
-    <value>収入額またはチャージ額</value>
-    <comment>Income or charged amount.</comment>
-  </data>
-  <data name="LoadBtn.Label" xml:space="preserve">
-    <value>読み込み</value>
-    <comment>読み込みボタンのラベル</comment>
-  </data>
-  <data name="Name.Header" xml:space="preserve">
-    <value>名称</value>
-    <comment>名前を表すヘッダー</comment>
-  </data>
-  <data name="NextBtn.Label" xml:space="preserve">
-    <value>次へ</value>
-    <comment>次に進むボタン</comment>
-  </data>
-  <data name="PaymentMethod.Header" xml:space="preserve">
-    <value>支払い手段</value>
-    <comment>支払い手段の表示名</comment>
-  </data>
-  <data name="RemoveBtn.Label" xml:space="preserve">
-    <value>削除</value>
-    <comment>削除ボタンのラベル</comment>
-  </data>
-  <data name="RemoveConfirmBtn.Content" xml:space="preserve">
-    <value>確認して削除</value>
-    <comment>確認後の削除ボタンのラベル</comment>
-  </data>
-  <data name="RemoveMessage.Text" xml:space="preserve">
-    <value>選択した項目を削除します．この操作は取り消せません．よろしいですか．</value>
-    <comment>削除時の確認</comment>
-  </data>
-  <data name="SaveBtn.Label" xml:space="preserve">
-    <value>保存</value>
-    <comment>変更を保存するボタンのラベル</comment>
-  </data>
-  <data name="Time.Header" xml:space="preserve">
-    <value>時刻</value>
-    <comment>時刻のヘッダー</comment>
+  <data name="Methods.Content" xml:space="preserve">
+    <value>支払い手段一覧</value>
   </data>
 </root>

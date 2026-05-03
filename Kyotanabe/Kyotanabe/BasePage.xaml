@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Kyotanabe.BasePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kyotanabe"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <NavigationView
+            IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <NavigationViewItem
+                    x:Uid="/NavigationResources/Items"
+                    Icon="GlobalNavigationButton"
+                    Tag="Items"/>
+                <NavigationViewItem
+                    x:Uid="/NavigationResources/Categories">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEDE3;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    x:Uid="/NavigationResources/Accounts"
+                    Tag="Accounts">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE825;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    x:Uid="/NavigationResources/Methods"
+                    Tag="Methods">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8C7;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="SuperFrame"/>
+        </NavigationView>
+    </Grid>
+</Page>

@@ -75,6 +75,14 @@ namespace Kizu.ViewModels
             await _databaseService.UpdateAsync(category);
         }
 
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSave))]
+        public async Task AddAsync()
+        {
+            await SaveAsync();
+
+            WeakReferenceMessenger.Default.Send(new CategoryAddedMessage(category));
+        }
+
         [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanRemove))]
         public async Task RemoveAsync()
         {

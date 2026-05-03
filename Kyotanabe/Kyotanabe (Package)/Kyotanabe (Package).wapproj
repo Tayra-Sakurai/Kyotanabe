@@ -101,6 +101,10 @@
     <Content Include="Assets\Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Images\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Licenses\en-GB\LICENSE.rtf" />
+    <Content Include="Assets\Licenses\en-US\LICENSE.rtf" />
+    <Content Include="Assets\Licenses\en\LICENSE.rtf" />
+    <Content Include="Assets\Licenses\ja-JP\LICENSE.rtf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kyotanabe\Kyotanabe.csproj">
