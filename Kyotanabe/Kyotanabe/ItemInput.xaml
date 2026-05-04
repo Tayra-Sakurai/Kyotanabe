@@ -40,29 +40,13 @@
             <ComboBox
                 ItemsSource="{Binding CategoryList}"
                 SelectedItem="{Binding Category, Mode=TwoWay}"
-                x:Uid="/FieldResources/Category">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate x:DataType="models:Category">
-                        <TextBlock Text="{x:Bind Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-                <ComboBox.ItemContainerStyle>
-                    <Style
-                        TargetType="ComboBoxItem"
-                        BasedOn="{StaticResource DefaultComboBoxItemStyle}"/>
-                </ComboBox.ItemContainerStyle>
-            </ComboBox>
+                Style="{StaticResource CategorySelectComboBoxStyle}"
+                x:Uid="/FieldResources/Category"/>
             <ComboBox
                 ItemsSource="{Binding PaymentMethodList}"
                 SelectedItem="{Binding PaymentMethod, Mode=TwoWay}"
-                x:Uid="/FieldResources/PaymentMethod">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="models:PaymentMethod">
-                        <TextBlock Text="{x:Bind Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                Style="{StaticResource PaymentMethodSelectComboBoxStyle}"
+                x:Uid="/FieldResources/PaymentMethod"/>
         </StackPanel>
         <controls:ValidationNumberBox
             x:Uid="/FieldResources/Expense"

@@ -38,7 +38,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local2:EditControl" xmlns:local2="using:Kyotanabe.Templates">
+    <Style TargetType="local2:EditControl">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local2:EditControl">
@@ -81,6 +81,73 @@
                             </CommandBar>
                         </Grid>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local2:ViewBaseControl" xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors" xmlns:interactivity="using:Microsoft.Xaml.Interactivity">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local2:ViewBaseControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListView
+                            Name="PART_ListView"
+                            ItemsSource="{TemplateBinding ItemsSource}"
+                            ItemTemplate="{TemplateBinding TableRowTemplate}"
+                            SelectedItem="{TemplateBinding RemoveCommandParameter}">
+                            <ListView.Header>
+                                <Border Padding="12,0,0,0">
+                                    <interactivity:Interaction.Behaviors>
+                                        <behaviors:StickyHeaderBehavior/>
+                                    </interactivity:Interaction.Behaviors>
+                                    <ContentPresenter Content="{TemplateBinding TableHeader}"/>
+                                </Border>
+                            </ListView.Header>
+                            <ListView.ItemContainerStyle>
+                                <Style
+                                    TargetType="ListViewItem"
+                                    BasedOn="{StaticResource DefaultListViewItemStyle}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                        <ContentPresenter
+                            Grid.Row="1"
+                            Content="{TemplateBinding AdditionalContent}"/>
+                        <CommandBar
+                            Grid.Row="2"
+                            DefaultLabelPosition="Right">
+                            <AppBarButton
+                                x:Uid="/FieldResources/AddBtn"
+                                Command="{TemplateBinding AddCommand}"
+                                Icon="Add"/>
+                            <AppBarButton
+                                x:Uid="/FieldResources/RemoveBtn"
+                                Icon="Delete">
+                                <AppBarButton.Flyout>
+                                    <Flyout>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource BaseTextBlockStyle}" x:Uid="/FieldResources/RemoveMessage"/>
+                                            <Button
+                                                x:Uid="/FieldResources/RemoveConfirmBtn"
+                                                Command="{TemplateBinding RemoveCommand}"
+                                                CommandParameter="{TemplateBinding RemoveCommandParameter}"/>
+                                        </StackPanel>
+                                    </Flyout>
+                                </AppBarButton.Flyout>
+                            </AppBarButton>
+                            <AppBarButton
+                                x:Uid="/FieldResources/LoadBtn"
+                                Icon="Download"
+                                Command="{TemplateBinding LoadCommand}"/>
+                        </CommandBar>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

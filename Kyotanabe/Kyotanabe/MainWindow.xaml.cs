@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -26,6 +26,14 @@ namespace Kyotanabe
         public MainWindow()
         {
             InitializeComponent();
+
+            Activated += MainWindow_Activated;
+        }
+
+        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            if (SuperFrame.CurrentSourcePageType is null)
+                SuperFrame.Navigate(typeof(ItemsViewPage));
         }
     }
 }

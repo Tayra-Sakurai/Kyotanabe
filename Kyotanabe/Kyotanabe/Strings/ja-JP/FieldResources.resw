@@ -192,6 +192,12 @@
     <value>保存</value>
     <comment>変更を保存するボタンのラベル</comment>
   </data>
+  <data name="Search.Header" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="SearchBtn.Label" xml:space="preserve">
+    <value>検索</value>
+  </data>
   <data name="Time.Header" xml:space="preserve">
     <value>時刻</value>
     <comment>時刻のヘッダー</comment>
