@@ -90,7 +90,7 @@
                     x:Uid="/FieldResources/Category"
                     ItemsSource="{x:Bind viewModel.Categories}"
                     SelectedItem="{x:Bind viewModel.SelectedCategory}"
-                    Style="{StaticResource CategorySelectComboBoxStyle}"/>
+                    ItemTemplate="{StaticResource CategoryComboBoxItemTemplate}"/>
                 <TextBox
                     Grid.Column="1"
                     x:Uid="/FieldResources/Search"
@@ -111,7 +111,7 @@
                 Command="{x:Bind viewModel.RemoveCommand}"
                 CommandParameter="{Binding SelectedItem, ElementName=TheTable}"/>
             <AppBarButton
-                x:Uid="/FeildResources/LoadBtn"
+                x:Uid="/FieldResources/LoadBtn"
                 Icon="Download"
                 Command="{x:Bind viewModel.LoadCommand}"/>
             <AppBarButton

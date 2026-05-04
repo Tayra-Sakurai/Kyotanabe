@@ -18,6 +18,7 @@
     <None Remove="CategoriesViewPage.xaml" />
     <None Remove="CategoryEditPage.xaml" />
     <None Remove="CategoryInput.xaml" />
+    <None Remove="ComboBoxTemplateDictionary.xaml" />
     <None Remove="ItemEditPage.xaml" />
     <None Remove="ItemInput.xaml" />
     <None Remove="ItemsViewPage.xaml" />
@@ -56,6 +57,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Inari\Inari.csproj" />
     <ProjectReference Include="..\..\Kizu\Kizu.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ComboBoxTemplateDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

@@ -40,12 +40,12 @@
             <ComboBox
                 ItemsSource="{Binding CategoryList}"
                 SelectedItem="{Binding Category, Mode=TwoWay}"
-                Style="{StaticResource CategorySelectComboBoxStyle}"
+                ItemTemplate="{StaticResource CategoryComboBoxItemTemplate}"
                 x:Uid="/FieldResources/Category"/>
             <ComboBox
                 ItemsSource="{Binding PaymentMethodList}"
                 SelectedItem="{Binding PaymentMethod, Mode=TwoWay}"
-                Style="{StaticResource PaymentMethodSelectComboBoxStyle}"
+                ItemTemplate="{StaticResource PaymentMethodComboBoxTemplate}"
                 x:Uid="/FieldResources/PaymentMethod"/>
         </StackPanel>
         <controls:ValidationNumberBox

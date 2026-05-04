@@ -78,15 +78,16 @@ namespace Kizu.ViewModels
         }
 
         [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(Exists))]
-        public async Task RemoveAsync(Item item)
+        public async Task RemoveAsync(Item? item)
         {
+            if (item is null) return;
             await databaseService.RemoveAsync(item);
             await LoadAsync();
         }
 
-        private bool Exists(Item item)
+        private bool Exists(Item? item)
         {
-            return databaseService.Exists(item);
+            return item is not null && databaseService.Exists(item);
         }
 
         [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSearch))]
