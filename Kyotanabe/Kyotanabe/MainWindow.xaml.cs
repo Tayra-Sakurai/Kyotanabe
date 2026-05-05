@@ -33,7 +33,7 @@ namespace Kyotanabe
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
             if (SuperFrame.CurrentSourcePageType is null)
-                SuperFrame.Navigate(typeof(ItemsViewPage));
+                SuperFrame.Navigate(typeof(BasePage));
         }
     }
 }

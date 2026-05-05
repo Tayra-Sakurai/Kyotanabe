@@ -10,14 +10,16 @@
 
     <Grid>
         <NavigationView
-            IsSettingsVisible="False">
+            IsSettingsVisible="False"
+            x:Name="MainNavigation">
             <NavigationView.MenuItems>
                 <NavigationViewItem
                     x:Uid="/NavigationResources/Items"
                     Icon="GlobalNavigationButton"
                     Tag="Items"/>
                 <NavigationViewItem
-                    x:Uid="/NavigationResources/Categories">
+                    x:Uid="/NavigationResources/Categories"
+                    Tag="Categories">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEDE3;"/>
                     </NavigationViewItem.Icon>
