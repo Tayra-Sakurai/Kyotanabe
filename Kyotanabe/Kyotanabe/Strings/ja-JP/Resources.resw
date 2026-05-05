@@ -130,6 +130,9 @@
     <value>このページには，これまでに登録された項目が表示されます．</value>
     <comment>表示の案内</comment>
   </data>
+  <data name="PaymentMethodsIntro.Text" xml:space="preserve">
+    <value>このページには，登録された支払い手段とその推定残高が表示されています．</value>
+  </data>
   <data name="Setup.Text" xml:space="preserve">
     <value>初期設定</value>
     <comment>ヘッダー</comment>
@@ -145,6 +148,9 @@
   <data name="SetupCategory.Text" xml:space="preserve">
     <value>セットアップを始めます．まずは最初のカテゴリを設定します．あなたの月ごとの予算はカテゴリごとに管理されます．</value>
     <comment>カテゴリの設定．</comment>
+  </data>
+  <data name="SetupPaymentMethod.Text" xml:space="preserve">
+    <value>支払い手段を登録します．この情報は提供元が確認できないようになっています．</value>
   </data>
   <data name="SetupStart.Text" xml:space="preserve">
     <value>Kyotanabe へようこそ．ご利用に際しては，以下のライセンス条項にご同意いただく必要があります．ライセンス条項にご同意される場合は以下の項目にチェックを入れて「次へ」を押してください．</value>

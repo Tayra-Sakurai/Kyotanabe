@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="Kyotanabe.CategoriesViewPage"
+    x:Class="Kyotanabe.AccountsViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Kyotanabe"
@@ -16,36 +16,25 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock
-            x:Uid="CategoriesIntro"
-            Style="{StaticResource BodyTextBlockStyle}"/>
-
+        <TextBlock x:Uid="AccountsIntro"/>
         <controls2:ViewBaseControl
             Grid.Row="1"
-            ItemsSource="{x:Bind viewModel.Categories}"
             AddCommand="{x:Bind viewModel.AddCommand}"
             RemoveCommand="{x:Bind viewModel.RemoveCommand}"
             LoadCommand="{x:Bind viewModel.LoadCommand}"
-            DetailCommand="{x:Bind viewModel.InvokeCommand}">
+            DetailCommand="{x:Bind viewModel.InvokeCommand}"
+            ItemsSource="{x:Bind viewModel.Accounts}">
             <controls2:ViewBaseControl.TableHeader>
                 <controls:DataTable>
-                    <controls:DataColumn
-                        x:Uid="/ColumnResources/Identifier"
-                        DesiredWidth="80"/>
-                    <controls:DataColumn
-                        x:Uid="/ColumnResources/Name"
-                        DesiredWidth="*"/>
-                    <controls:DataColumn
-                        x:Uid="/ColumnResources/Budget"
-                        DesiredWidth="100"/>
+                    <controls:DataColumn x:Uid="/ColumnResources/Identifier" DesiredWidth="80"/>
+                    <controls:DataColumn x:Uid="/ColumnResources/Name" DesiredWidth="*"/>
                 </controls:DataTable>
             </controls2:ViewBaseControl.TableHeader>
             <controls2:ViewBaseControl.TableRowTemplate>
-                <DataTemplate x:DataType="models:Category">
+                <DataTemplate x:DataType="models:Account">
                     <controls:DataRow>
                         <TextBlock Text="{x:Bind Id}"/>
                         <TextBlock Text="{x:Bind Name}"/>
-                        <TextBlock Text="{x:Bind Budget}"/>
                     </controls:DataRow>
                 </DataTemplate>
             </controls2:ViewBaseControl.TableRowTemplate>

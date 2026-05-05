@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kizu.Migrations
 {
     [DbContext(typeof(KizuContext))]
-    [Migration("20260503015538_InitialCreate")]
+    [Migration("20260505010326_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

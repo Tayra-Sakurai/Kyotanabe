@@ -146,6 +146,11 @@
                                 x:Uid="/FieldResources/LoadBtn"
                                 Icon="Download"
                                 Command="{TemplateBinding LoadCommand}"/>
+                            <AppBarButton
+                                x:Uid="/FieldResources/DetailBtn"
+                                Icon="More"
+                                Command="{TemplateBinding DetailCommand}"
+                                CommandParameter="{TemplateBinding RemoveCommandParameter}"/>
                         </CommandBar>
                     </Grid>
                 </ControlTemplate>

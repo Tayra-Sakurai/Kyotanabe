@@ -113,6 +113,18 @@ public sealed partial class ViewBaseControl : Control
         typeof(ViewBaseControl),
         new PropertyMetadata(default(ICommand)));
 
+    public ICommand DetailCommand
+    {
+        get => (ICommand)GetValue(DetailCommandProperty);
+        set => SetValue(DetailCommandProperty, value);
+    }
+
+    private static readonly DependencyProperty DetailCommandProperty = DependencyProperty.Register(
+        nameof(DetailCommand),
+        typeof(ICommand),
+        typeof(ViewBaseControl),
+        new(default(ICommand)));
+
     public object RemoveCommandParameter
     {
         get => GetValue(RemoveCommandParameterProperty);

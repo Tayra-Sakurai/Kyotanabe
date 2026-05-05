@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Remove="AccountEditPage.xaml" />
     <None Remove="AccountInput.xaml" />
+    <None Remove="AccountsViewPage.xaml" />
     <None Remove="BasePage.xaml" />
     <None Remove="CategoriesViewPage.xaml" />
     <None Remove="CategoryEditPage.xaml" />
@@ -23,6 +24,7 @@
     <None Remove="ItemInput.xaml" />
     <None Remove="ItemsViewPage.xaml" />
     <None Remove="MethodEditPage.xaml" />
+    <None Remove="MethodsViewPage.xaml" />
     <None Remove="PaymentMethodInput.xaml" />
     <None Remove="SetupBasePage.xaml" />
   </ItemGroup>
@@ -57,6 +59,18 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Inari\Inari.csproj" />
     <ProjectReference Include="..\..\Kizu\Kizu.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MethodsViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="AccountsViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
