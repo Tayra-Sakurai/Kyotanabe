@@ -9,6 +9,9 @@
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>1.0.0</Version>
+    <Authors>SAKURAI Tayra</Authors>
+    <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Google.GenAI" Version="1.6.1" />
