@@ -42,11 +42,15 @@ public sealed partial class CategoryEditPage : Page, IRecipient<CategoryDeletedM
         if (e.Parameter is Category category &&
             DataContext is CategoryViewModel dataContext)
             dataContext.InitializeForExistingValue(category);
+
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     public void Receive(CategoryDeletedMessage message)
     {
         if (Frame.CanGoBack)
             Frame.GoBack();
+        else
+            Frame.Navigate(typeof(CategoriesViewPage));
     }
 }

@@ -37,6 +37,9 @@ namespace Kizu.ViewModels
             
             foreach (Category category in categories)
                 Categories.Add(category);
+
+            RemoveCommand.NotifyCanExecuteChanged();
+            InvokeCommand.NotifyCanExecuteChanged();
         }
 
         [RelayCommand(CanExecute = nameof(CanInvoke))]
@@ -90,7 +93,7 @@ namespace Kizu.ViewModels
 
         private bool CanRemove(Category? category)
         {
-            return category is not null && _databaseService.Exists(category);
+            return (category is not null) && _databaseService.Exists(category);
         }
 
         private static bool CanInvoke(Category? category)

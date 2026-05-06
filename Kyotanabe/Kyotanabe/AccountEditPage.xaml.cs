@@ -42,6 +42,8 @@ public sealed partial class AccountEditPage : Page, IRecipient<AccountDeletedMes
         if (DataContext is AccountViewModel dataContext &&
             e.Parameter is Account account)
             dataContext.InitializeForExistingValue(account);
+
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     public void Receive(AccountDeletedMessage message)

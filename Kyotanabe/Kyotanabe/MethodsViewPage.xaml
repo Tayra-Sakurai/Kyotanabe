@@ -32,9 +32,6 @@
                     <controls:DataColumn
                         x:Uid="/ColumnResources/Name"
                         DesiredWidth="*"/>
-                    <controls:DataColumn
-                        x:Uid="/ColumnResources/Balance"
-                        DesiredWidth="100"/>
                 </controls:DataTable>
             </controls2:ViewBaseControl.TableHeader>
             <controls2:ViewBaseControl.TableRowTemplate>
@@ -42,7 +39,6 @@
                     <controls:DataRow>
                         <TextBlock Text="{x:Bind Id}"/>
                         <TextBlock Text="{x:Bind Name}"/>
-                        <TextBlock Text="{x:Bind Balance}"/>
                     </controls:DataRow>
                 </DataTemplate>
             </controls2:ViewBaseControl.TableRowTemplate>

@@ -27,20 +27,22 @@ namespace Kyotanabe
     /// </summary>
     public sealed partial class AccountsViewPage : Page, IRecipient<AccountInvokedMessage>
     {
-        private readonly AccountsViewModel viewModel;
+        private AccountsViewModel? viewModel;
 
         public AccountsViewPage()
         {
             InitializeComponent();
-
-            viewModel = Ioc.Default.GetRequiredService<AccountsViewModel>();
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
+            viewModel = Ioc.Default.GetRequiredService<AccountsViewModel>();
+
             await viewModel.LoadAsync();
+
+            WeakReferenceMessenger.Default.Register(this);
         }
 
         public void Receive(AccountInvokedMessage message)

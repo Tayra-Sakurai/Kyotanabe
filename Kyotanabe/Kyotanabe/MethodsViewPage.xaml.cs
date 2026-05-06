@@ -42,6 +42,16 @@ namespace Kyotanabe
 
             if (viewModel is not null)
                 await viewModel.LoadAsync();
+
+            WeakReferenceMessenger.Default.Register<PaymentMethodAddingMessage>(this);
+            WeakReferenceMessenger.Default.Register<PaymentMethodInvokedMessage>(this);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+
+            WeakReferenceMessenger.Default.UnregisterAll(this);
         }
 
         public void Receive(PaymentMethodAddingMessage message)

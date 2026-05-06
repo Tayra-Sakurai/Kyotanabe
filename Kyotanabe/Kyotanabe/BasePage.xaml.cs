@@ -29,48 +29,91 @@ namespace Kyotanabe
             InitializeComponent();
 
             MainNavigation.ItemInvoked += MainNavigation_ItemInvoked;
+            MainNavigation.BackRequested += MainNavigation_BackRequested;
+
+            SuperFrame.Navigated += SuperFrame_Navigated;
+        }
+
+        private void MainNavigation_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            if (SuperFrame.CanGoBack)
+                SuperFrame.GoBack();
+            else
+                sender.IsBackEnabled = false;
+        }
+
+        private void SuperFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            Type pageType = ((Frame)sender).SourcePageType;
+
+            ResourceLoader resourceLoader = new();
+
+            if (pageType == typeof(ItemsViewPage))
+                MainNavigation.Header = resourceLoader.GetString("Items");
+            else if (pageType == typeof(ItemEditPage))
+                MainNavigation.Header = resourceLoader.GetString("Item");
+            else if (pageType == typeof(CategoriesViewPage))
+                MainNavigation.Header = resourceLoader.GetString("Categories");
+            else if (pageType == typeof(CategoryEditPage))
+                MainNavigation.Header = resourceLoader.GetString("Category");
+            else if (pageType == typeof(AccountsViewPage))
+                MainNavigation.Header = resourceLoader.GetString("Accounts");
+            else if (pageType == typeof(AccountEditPage))
+                MainNavigation.Header = resourceLoader.GetString("Account");
+            else if (pageType == typeof(MethodsViewPage))
+                MainNavigation.Header = resourceLoader.GetString("Methods");
+            else if (pageType == typeof(MethodEditPage))
+                MainNavigation.Header = resourceLoader.GetString("Method");
+            else
+                MainNavigation.Header = "";
+
+            if (((Frame)sender).CanGoBack)
+                MainNavigation.IsBackEnabled = true;
+            else
+                MainNavigation.IsBackEnabled = false;
         }
 
         private void MainNavigation_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            NavigationViewItem invokedItem = (NavigationViewItem)args.InvokedItem;
+            object invokedItem = args.InvokedItem;
 
-            ResourceLoader resourceLoader = new("HeaderResources");
+            ResourceLoader resourceLoader = new();
 
-            switch (invokedItem.Tag as string)
+            Type pageType;
+            string newHeader;
+
+            if (invokedItem == CategoriesItem.Content)
             {
-                case "Items":
-                    SuperFrame.Navigate(typeof(ItemsViewPage));
-                    sender.Header = resourceLoader.GetString(invokedItem.Tag as string);
-                    break;
-
-                case "Accounts":
-                    SuperFrame.Navigate(typeof(AccountsViewPage));
-                    sender.Header = resourceLoader.GetString(invokedItem.Tag as string);
-                    break;
-
-                case "Categories":
-                    SuperFrame.Navigate(typeof(CategoriesViewPage));
-                    sender.Header = resourceLoader.GetString((string)invokedItem.Tag);
-                    break;
-
-                case "Methods":
-                    SuperFrame.Navigate(typeof(MethodsViewPage));
-                    sender.Header = resourceLoader.GetString((string)invokedItem.Tag);
-                    break;
-
-                default:
-                    SuperFrame.Navigate(typeof(ItemsViewPage));
-                    sender.Header = resourceLoader.GetString("Items");
-                    break;
+                pageType = typeof(CategoriesViewPage);
+                newHeader = resourceLoader.GetString("Categories");
             }
+            else if (invokedItem == AccountsItem.Content)
+            {
+                pageType = typeof(AccountsViewPage);
+                newHeader = resourceLoader.GetString("Accounts");
+            }
+            else if (invokedItem == MethodsItem.Content)
+            {
+                pageType = typeof(MethodsViewPage);
+                newHeader = resourceLoader.GetString("Methods");
+            }
+            else
+            {
+                // Assumed as invokedItem == ItemsItem.Content
+
+                pageType = typeof(ItemsViewPage);
+                newHeader = resourceLoader.GetString("Items");
+            }
+
+            SuperFrame.Navigate(pageType);
+            sender.Header = newHeader;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            ResourceLoader resourceLoader = new("HeaderResources");
+            ResourceLoader resourceLoader = new();
 
             SuperFrame.Navigate(typeof(ItemsViewPage));
             MainNavigation.Header = resourceLoader.GetString("Items");

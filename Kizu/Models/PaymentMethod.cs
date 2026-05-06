@@ -13,6 +13,5 @@ namespace Kizu.Models
         public int? AccountId { get; set; } = null;
         public virtual Account? Account { get; set; } = null;
         public virtual ICollection<Item> Items { get; set; } = new List<Item>();
-        public double Balance => Items.Sum(i => i.Income - i.Expense);
     }
 }

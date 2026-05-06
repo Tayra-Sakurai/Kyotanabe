@@ -31,17 +31,19 @@ public sealed partial class MethodEditPage : Page, IRecipient<PaymentMethodDelet
     public MethodEditPage()
     {
         InitializeComponent();
-
-        DataContext = Ioc.Default.GetRequiredService<PaymentMethodViewModel>();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
+        DataContext = Ioc.Default.GetRequiredService<PaymentMethodViewModel>();
+
         if (DataContext is PaymentMethodViewModel dataContext &&
             e.Parameter is PaymentMethod paymentMethod)
             dataContext.InitializeForExistingValue(paymentMethod);
+
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     public void Receive(PaymentMethodDeletedMessage message)

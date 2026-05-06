@@ -27,20 +27,22 @@ namespace Kyotanabe;
 /// </summary>
 public sealed partial class ItemsViewPage : Page, IRecipient<ItemInvokedMessage>
 {
-    private ItemsViewModel viewModel;
+    private ItemsViewModel? viewModel;
 
     public ItemsViewPage()
     {
         InitializeComponent();
-
-        viewModel = Ioc.Default.GetRequiredService<ItemsViewModel>();
     }
 
     protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
+        viewModel = Ioc.Default.GetRequiredService<ItemsViewModel>();
+
         await viewModel.LoadAsync();
+
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     public void Receive(ItemInvokedMessage message)

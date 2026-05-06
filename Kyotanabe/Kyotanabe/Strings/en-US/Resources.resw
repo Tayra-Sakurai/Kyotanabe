@@ -117,17 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
   <data name="AccountsIntro.Text" xml:space="preserve">
     <value>This page lists the display names of your bank accounts.</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
   </data>
   <data name="CategoriesIntro.Text" xml:space="preserve">
     <value>This page displays the categories each with its budget and the condition.</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="EditIntro.Text" xml:space="preserve">
     <value>Editing an item....</value>
   </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Items</value>
+  </data>
   <data name="ItemsIntro.Text" xml:space="preserve">
     <value>This page displays the items you have registered.</value>
+  </data>
+  <data name="Method" xml:space="preserve">
+    <value>Payment Method</value>
+  </data>
+  <data name="Methods" xml:space="preserve">
+    <value>Payment Methods</value>
   </data>
   <data name="PaymentMethodsIntro.Text" xml:space="preserve">
     <value>This page shows the payment methods you have ever registered with their current balances.</value>

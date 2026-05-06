@@ -27,18 +27,20 @@ namespace Kyotanabe;
 /// </summary>
 public sealed partial class CategoriesViewPage : Page, IRecipient<CategoryInvokedMessage>
 {
-    private readonly CategoriesViewModel viewModel;
+    private CategoriesViewModel? viewModel;
 
     public CategoriesViewPage()
     {
         InitializeComponent();
-
-        viewModel = Ioc.Default.GetRequiredService<CategoriesViewModel>();
     }
 
     protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+
+        viewModel = Ioc.Default.GetRequiredService<CategoriesViewModel>();
+
+        WeakReferenceMessenger.Default.Register(this);
 
         await viewModel.LoadAsync();
     }
@@ -46,5 +48,12 @@ public sealed partial class CategoriesViewPage : Page, IRecipient<CategoryInvoke
     public void Receive(CategoryInvokedMessage message)
     {
         Frame.Navigate(typeof(CategoryEditPage), message.Value);
+    }
+
+    protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+    {
+        base.OnNavigatingFrom(e);
+
+        WeakReferenceMessenger.Default.UnregisterAll(this);
     }
 }

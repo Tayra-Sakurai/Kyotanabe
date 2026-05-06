@@ -17,7 +17,7 @@
         Orientation="Vertical">
         <controls:ValidationTextBox
             x:Uid="/FieldResources/AccountName"
-            Text="{Binding Name}"
+            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Property="Name"/>
     </StackPanel>
 </UserControl>
