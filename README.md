@@ -14,4 +14,4 @@ This project is licensed under the GNU Affero General Public License v3.0 or lat
 See [LICENSE.txt](LICENSE.txt) for the full license text.
 
 ## Copyright
-Copyright (C) 2026 Tayra Sakurai
+Copyright &copy; 2026 Tayra Sakurai
