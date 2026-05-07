@@ -45,9 +45,11 @@ namespace Kizu.ViewModels
             };
         }
 
-        public void InitializeForExistingValue(Item item)
+        public async Task InitializeForExistingValueAsync(Item item)
         {
             this.item = item;
+            await databaseService.LoadReferenceAsync(this.item, i => i.PaymentMethod);
+            await databaseService.LoadReferenceAsync(this.item, i => i.Category);
 
             OnPropertyChanged(nameof(ItemName));
             OnPropertyChanged(nameof(Category));

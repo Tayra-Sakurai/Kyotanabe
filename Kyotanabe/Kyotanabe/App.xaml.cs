@@ -76,8 +76,7 @@ namespace Kyotanabe
             string source = System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Kizu.db");
             services.AddDbContextFactory<KizuContext>(
                 builder =>
-                builder.UseLazyLoadingProxies()
-                .UseSqlite($"Data Source={source}"));
+                builder.UseSqlite($"Data Source={source}"));
 
             services.AddSingleton<IDatabaseService<KizuContext>, KizuDatabaseService>();
             services.AddSingleton<IEmbeddingService<TaskType>, GoogleEmbeddingService>();

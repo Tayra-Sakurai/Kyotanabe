@@ -27,9 +27,10 @@ namespace Kizu.ViewModels
             account = new();
         }
 
-        public void InitializeForExistingValue(Account account)
+        public async Task InitializeForExistingValueAsync(Account account)
         {
             this.account = account;
+            await databaseService.LoadCollectionAsync(this.account, a => a.PaymentMethods);
 
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Invoice));

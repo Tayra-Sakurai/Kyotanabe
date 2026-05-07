@@ -52,7 +52,11 @@ namespace Kizu.ViewModels
             IEnumerable<Item> items = await databaseService.GetEntitiesAsync(context => context.Items);
 
             foreach (Item item in items)
+            {
+                await databaseService.LoadReferenceAsync(item, i => i.PaymentMethod);
+                await databaseService.LoadReferenceAsync(item, i => i.Category);
                 Items.Add(item);
+            }
 
             Categories.Clear();
 

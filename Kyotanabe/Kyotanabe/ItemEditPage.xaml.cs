@@ -33,7 +33,7 @@ public sealed partial class ItemEditPage : Page, IRecipient<ItemDeletedMessage>
         InitializeComponent();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
@@ -41,7 +41,7 @@ public sealed partial class ItemEditPage : Page, IRecipient<ItemDeletedMessage>
 
         if (DataContext is ItemViewModel dataContext &&
             e.Parameter is Item item)
-            dataContext.InitializeForExistingValue(item);
+            await dataContext.InitializeForExistingValueAsync(item);
 
         WeakReferenceMessenger.Default.Register(this);
     }

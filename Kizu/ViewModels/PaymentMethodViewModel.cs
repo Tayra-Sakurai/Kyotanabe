@@ -34,9 +34,11 @@ namespace Kizu.ViewModels
         [ObservableProperty]
         private ObservableCollection<Account> accounts;
 
-        public void InitializeForExistingValue(PaymentMethod paymentMethod)
+        public async Task InitializeForExistingValueAsync(PaymentMethod paymentMethod)
         {
             this.paymentMethod = paymentMethod;
+            await databaseService.LoadCollectionAsync(this.paymentMethod, p => p.Items);
+            await databaseService.LoadReferenceAsync(this.paymentMethod, p => p.Account);
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Balance));
             OnPropertyChanged(nameof(Account));

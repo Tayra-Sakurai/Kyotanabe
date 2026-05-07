@@ -35,13 +35,13 @@ public sealed partial class AccountEditPage : Page, IRecipient<AccountDeletedMes
         DataContext = Ioc.Default.GetRequiredService<AccountViewModel>();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
         if (DataContext is AccountViewModel dataContext &&
             e.Parameter is Account account)
-            dataContext.InitializeForExistingValue(account);
+            await dataContext.InitializeForExistingValueAsync(account);
 
         WeakReferenceMessenger.Default.Register(this);
     }
@@ -54,6 +54,6 @@ public sealed partial class AccountEditPage : Page, IRecipient<AccountDeletedMes
             return;
         }
 
-
+        Frame.Navigate(typeof(AccountsViewPage));
     }
 }

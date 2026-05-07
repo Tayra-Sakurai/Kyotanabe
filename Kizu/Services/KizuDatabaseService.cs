@@ -96,5 +96,27 @@ namespace Kizu.Services
 
             return entry.State == EntityState.Unchanged;
         }
+
+        public async Task LoadCollectionAsync<TEntity, TRelated>(TEntity entity, Expression<Func<TEntity, IEnumerable<TRelated>>> selector)
+            where TEntity : class
+            where TRelated : class
+        {
+            using KizuContext context = await factory.CreateDbContextAsync();
+
+            EntityEntry<TEntity> entry = context.Attach(entity);
+
+            await entry.Collection(selector).LoadAsync();
+        }
+
+        public async Task LoadReferenceAsync<TEntity, TRelated>(TEntity entity, Expression<Func<TEntity, TRelated?>> selector)
+            where TEntity: class
+            where TRelated : class
+        {
+            using KizuContext context = await factory.CreateDbContextAsync();
+
+            EntityEntry<TEntity> entityEntry = context.Attach(entity);
+
+            await entityEntry.Reference(selector).LoadAsync();
+        }
     }
 }

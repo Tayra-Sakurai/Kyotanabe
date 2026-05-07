@@ -11,7 +11,7 @@ namespace Kizu.Models
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public int? AccountId { get; set; } = null;
-        public virtual Account? Account { get; set; } = null;
-        public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+        public Account? Account { get; set; } = null;
+        public ICollection<Item> Items { get; set; } = new List<Item>();
     }
 }

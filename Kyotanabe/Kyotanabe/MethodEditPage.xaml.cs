@@ -33,7 +33,7 @@ public sealed partial class MethodEditPage : Page, IRecipient<PaymentMethodDelet
         InitializeComponent();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
 
@@ -41,7 +41,7 @@ public sealed partial class MethodEditPage : Page, IRecipient<PaymentMethodDelet
 
         if (DataContext is PaymentMethodViewModel dataContext &&
             e.Parameter is PaymentMethod paymentMethod)
-            dataContext.InitializeForExistingValue(paymentMethod);
+            await dataContext.InitializeForExistingValueAsync(paymentMethod);
 
         WeakReferenceMessenger.Default.Register(this);
     }

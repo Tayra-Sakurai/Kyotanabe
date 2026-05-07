@@ -15,8 +15,8 @@ namespace Kizu.Models
         public double Expense { get; set; } = 0;
         public double Income { get; set; } = 0;
         public int PaymentMethodId { get; set; }
-        public virtual Category Category { get; set; } = null!;
-        public virtual PaymentMethod PaymentMethod { get; set; } = null!;
+        public Category Category { get; set; } = null!;
+        public PaymentMethod PaymentMethod { get; set; } = null!;
         public float[] Vector { get; set; } = new float[768];
     }
 }

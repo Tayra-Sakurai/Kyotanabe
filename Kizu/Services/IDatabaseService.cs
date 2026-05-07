@@ -86,5 +86,29 @@ namespace Kizu.Services
         /// <returns>The entities.</returns>
         List<T> GetEntities<T>(Expression<Func<TContext, DbSet<T>>> selector)
             where T : class;
+
+        /// <summary>
+        /// Asynchronously loads the entities of the related records.
+        /// </summary>
+        /// <typeparam name="TEntity">The relation parent entity type.</typeparam>
+        /// <typeparam name="TRelated">The child entity type.</typeparam>
+        /// <param name="entity">The entity to load the children.</param>
+        /// <param name="selector">The function to select the relation.</param>
+        /// <returns>The task which represents the asynchronous operation.</returns>
+        Task LoadCollectionAsync<TEntity, TRelated>(TEntity entity, Expression<Func<TEntity, IEnumerable<TRelated>>> selector)
+            where TEntity : class
+            where TRelated : class;
+
+        /// <summary>
+        /// Asynchronously loads the entity related to the <paramref name="entity"/> selected by <paramref name="selector"/>.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type.</typeparam>
+        /// <typeparam name="TRelated">The related entity type.</typeparam>
+        /// <param name="entity">The entity itself.</param>
+        /// <param name="selector">The selector function to get the entity of the related entity.</param>
+        /// <returns>The <see cref="Task"/> to represent the asynchronous operation.</returns>
+        Task LoadReferenceAsync<TEntity, TRelated>(TEntity entity, Expression<Func<TEntity, TRelated?>> selector)
+            where TEntity : class
+            where TRelated: class;
     }
 }
